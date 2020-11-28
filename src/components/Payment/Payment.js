@@ -94,7 +94,7 @@ function Payment() {
           <div className="payment__address">
             <p>{user?.email}</p>
             <p>123, React Lane</p>
-            <p>Magarpatta, Pune</p>
+            <p>Mirzapur, Prime Video</p>
           </div>
         </div>
         {/* review Items */}
