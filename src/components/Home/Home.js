@@ -16,6 +16,7 @@ const Home = () => {
         <div className="home">
             <div className="home__container">
                 {/* Image Banner */}
+
                 <div className="home__toast-container">
                     <ToastContainer />
                 </div>
@@ -198,7 +199,7 @@ function moveCorousal(counter, slides, len) {
             toast.info(`${faker.name.findName()} added new product to cart`, {
                 position: "bottom-left"
             });
-        }, 10500)
+        }, 10500) 
     ) : (
             setTimeout(() => {
             }, 21000)

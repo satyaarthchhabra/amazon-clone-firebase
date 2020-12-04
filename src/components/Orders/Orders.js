@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Order from '../Order/Order';
 
 function Orders() {
-    const [{ cart, user }, dispatch] = useStateValue();
+    const [{  user } ] = useStateValue();
     const [orders, setOrders] = useState([])
 
     useEffect(() => {

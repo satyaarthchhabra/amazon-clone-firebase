@@ -10,7 +10,7 @@ import {
   Profile,
   Payment,
   ProductList,
-} from "./components/";
+} from "./components";
 import { Header, Footer } from "./layout";
 import { loadStripe } from "@stripe/stripe-js";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ import { auth, db } from "./firebase/firebaseConfig";
 import { useStateValue } from "./context/StateProvider";
 
 const promise = loadStripe(
-  "pk_test_51HPvTZEm4kUlkaUGOprKB6CIt1RW7nlhHhINLYNBJCTM2m2eSwsML1Lq6eEJmHadidUcmUAP1Rbtq45kC4EW9Iv200K0HUq19q"
+  "pk_test_51GoSJxAItgkmdP1PK6MEKu6jKtSvPvIkc7fA4v83PhWzS4znGkC5AAkfbelCPPEe4NSbxQrUz2pJutDPg2DSg1SE00JCvV06ob"
 );
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
     });
   }, [profile]);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <Router>
@@ -85,7 +85,6 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
-           
           </Route>
           <Route path="/orders">
             <Header />

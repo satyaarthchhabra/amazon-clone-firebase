@@ -12,7 +12,7 @@ const cors = require('cors')
 
 // secret key from firebase
 const stripe = require("stripe")(
-    'sk_test_51HPvTZEm4kUlkaUGUtdgfKtGfv4XjINHF9bohxPtgELHIva3ukVTZnoQ0lb7JrT6exoYBDigELGUZZrqCrWGEEDI00bTwhkh9Q'
+    'sk_test_51GoSJxAItgkmdP1PVHdjLMQw59jpceLCpw0l5jR22zsQRDf6ZmmLuiv2LQvy48vp0q7EoGgLJT0ziWLNKBKGezWh00rgp96LDT'
 );
 
 // API
@@ -43,5 +43,3 @@ app.post('/payments/create', async (request, response) => {
 
 // - Listen
 exports.api = functions.https.onRequest(app)
-
-// URL: http://localhost:5001/clone-36782/us-central1/api
