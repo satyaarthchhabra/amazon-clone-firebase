@@ -7,7 +7,7 @@ import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarOutlineIcon from '@material-ui/icons/StarBorder';
 import { useStateValue } from '../../context/StateProvider';
 
-function Product({ id, title, price, rating, image }) {
+function Product({ id, title, price, rating, image,seller }) {
 
     const [{ cart }, dispatch] = useStateValue()
     let halfRating = (rating - Math.floor(rating)) * 10;
@@ -21,7 +21,7 @@ function Product({ id, title, price, rating, image }) {
             type: 'ADD_TO_CART',
             payload: { id, title, price, rating, image }
         })
-        toast.info(`${title} added worth \n ₹${price}`);
+        toast.info(`${title} added worth \n ₹${price} by seller:${seller}`);
     }
 
     return (
@@ -29,6 +29,7 @@ function Product({ id, title, price, rating, image }) {
             <img src={image} alt={title} />
             <div className="product__info">
                 <p>{title}</p>
+                <p>by seller : <strong>{seller}</strong></p>
                 <div className="product__group">
                     <p className="product__price">
                         <small>₹.</small>

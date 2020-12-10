@@ -53,7 +53,7 @@ const reducer = (state, action) => {
             // Logic for adding item to cart
             return {
                 ...state,
-                products: [...state.products, action.payload]
+                products: action.payload
             }
 
         case 'SET_USER':

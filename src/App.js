@@ -24,12 +24,13 @@ const promise = loadStripe(
 
 function App() {
   const [profile, setProfile] = useState([]);
-  const [products, setProducts] = useState([]);
+
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       // user is logged in
+      
       dispatch({
         type: "SET_USER",
         user: authUser ? authUser : null,
@@ -42,6 +43,7 @@ function App() {
     };
   }, []);
 
+
   useEffect(() => {
     if (user && profile) {
       db.collection("users")
@@ -52,15 +54,32 @@ function App() {
         );
     } else setProfile([]);
 
-    if (user && products) {
-      db.collection("products")
-        .doc()
-        .collection("products")
-        .onSnapshot((snapshot) =>
-          setProducts(snapshot.docs.map((doc) => doc.data()))
-        );
-    } else setProducts([]);
-  }, [user]);
+    // if (user && products) {
+    //   db.collection("products")
+    //     .doc()
+    //     .collection("products")
+    //     .onSnapshot((snapshot) =>
+    //       setProducts(snapshot.docs.map((doc) => doc.data()))
+    //     );
+    //   } else setProducts([]);
+    }, [user]);
+    
+    useEffect(() => {
+      try {
+        db.collection("products").get().then((snapshot) =>{
+          dispatch({
+            type:"ADD_TO_PRODUCTS",
+            payload: snapshot.docs.map((contentObj) => ({
+            ...contentObj.data(),
+            docId: contentObj.id,
+        }))})
+        })
+    
+  } catch (error) {
+    console.log(error);
+  }
+},[])
+
 
   useEffect(() => {
     dispatch({
@@ -69,7 +88,7 @@ function App() {
     });
   }, [profile]);
 
-  // console.log(products);
+
 
   return (
     <Router>
@@ -79,6 +98,9 @@ function App() {
             <Header />
             <Cart />
             <Footer />  
+          </Route>
+          <Route path="/admin">
+            AdminPanel
           </Route>
           <Route path="/login">
             <Login />
@@ -103,7 +125,7 @@ function App() {
             </Elements>
             <Footer />
           </Route>
-          <Route path="/">
+          <Route path="/" >
             <Header />
             <Home />
             <Footer />
