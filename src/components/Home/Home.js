@@ -6,10 +6,11 @@ import { useEffect } from "react";
 import faker from "faker";
 import { ToastContainer } from "react-toastify";
 import { useStateValue } from "../../context/StateProvider";
+import { displayFilter } from "../../utils/basicUtils";
 
 const Home = () => {
     const [{ products, }, ] = useStateValue();
-    console.log(products);
+  
     
   useEffect(() => slider(0), []);
 
@@ -76,7 +77,7 @@ const Home = () => {
         <div className="home__row">
           {/* Product */}
           {
-              products?.map((product,index) =>(
+              displayFilter(products)?.map((product,index) =>(
                   <Product
                   key={product.docId}
                     id={product.docId}

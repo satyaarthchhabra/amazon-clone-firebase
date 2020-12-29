@@ -1,6 +1,8 @@
 export const initialState = {
     cart: [],
     user: null,
+    totalOrders:[],
+    users:[],  
     profile: null,
     products: [],
     categories: ["Phones", "Laptops"]
@@ -54,6 +56,18 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 products: action.payload
+            }
+        case 'SET_ALL_USERS':
+            // Logic for adding item to cart
+            return {
+                ...state,
+                users: action.payload
+            }
+        case 'SET_TOTAL_ORDERS':
+            // Logic for adding item to cart
+            return {
+                ...state,
+                totalOrders: action.payload
             }
 
         case 'SET_USER':

@@ -7,4 +7,5 @@ export { default as Orders } from './Orders/Orders';
 export { default as Profile } from './Profile/Profile';
 export { default as Payment } from './Payment/Payment';
 export { default as AdminPanel } from './AdminPanel/AdminPanel';
-// export { default as GlobalStyles } from './GlobalStyles/GlobalStyles';
+export { default as GlobalStyles } from './GlobalStyles/GlobalStyles';
+export { default as Page } from './Page/Page';

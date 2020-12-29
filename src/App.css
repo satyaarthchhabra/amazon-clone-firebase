@@ -6,7 +6,12 @@
   font-size: 14px;
   color: #131921;
 }
-
+.MuiGrid-spacing-xs-3 > .MuiGrid-item{
+  padding:11px !important;
+}
+.text-white{
+  color: white !important;
+}
 .Toastify__progress-bar {
   background-color: #131921 !important;
 }

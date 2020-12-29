@@ -19,7 +19,7 @@ function Product({ id, title, price, rating, image,seller }) {
         // Add item to basket
         dispatch({
             type: 'ADD_TO_CART',
-            payload: { id, title, price, rating, image }
+            payload: { id, title, price, rating, image,seller }
         })
         toast.info(`${title} added worth \n ₹${price} by seller:${seller}`);
     }

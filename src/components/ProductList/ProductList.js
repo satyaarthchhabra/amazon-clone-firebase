@@ -1,15 +1,17 @@
 import React from 'react'
 import { useStateValue } from '../../context/StateProvider';
+import { displayFilter } from '../../utils/basicUtils';
 import Product from '../Product/Product'
 import './ProductList.css'
 
 function ProductList() {
     const [{ products, }, ] = useStateValue();
+    
     return (
         <div className="productList">
             <div className="productList__row">
             {
-              products?.map((product,index) =>(
+              displayFilter(products)?.map((product,index) =>(
                   <Product
                   key={product.docId}
                     id={product.docId}

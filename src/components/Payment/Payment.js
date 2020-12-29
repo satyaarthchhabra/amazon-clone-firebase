@@ -31,7 +31,7 @@ function Payment() {
         url: `/payments/create?total=${getCartTotal(cart) * 100}`,
       });
       setClientSecret(response.data.clientSecret);
-      console.log("secret is -> ", clientSecret);
+      
     };
 
     getClientSecret();
@@ -42,7 +42,7 @@ function Payment() {
     e.preventDefault();
     setProcessing(true);
 
-    const payload = await stripe
+    await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -50,6 +50,7 @@ function Payment() {
       })
       .then(({ paymentIntent }) => {
         // payment intent = payment confirmation
+console.log(paymentIntent);
 
         db.collection("users")
           .doc(user?.uid)
@@ -59,6 +60,8 @@ function Payment() {
             cart: cart,
             amount: paymentIntent.amount,
             created: paymentIntent.created,
+            email:user.email,
+            id:paymentIntent.id
           });
 
         setSucceeded(true);
