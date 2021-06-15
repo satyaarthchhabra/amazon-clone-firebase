@@ -3,7 +3,7 @@ import {
   Box,
   Container,
   Grid,
-  makeStyles
+  makeStyles, Typography
 } from '@material-ui/core';
 import Page from '../../../Page/Page';
 import ProductCard from './ProductCard';
@@ -33,7 +33,7 @@ const ProductList = () => {
       title="Products"
     >
       <Container maxWidth={false}>
-        
+     <Typography variant="h3" color="primary" align="center">All Products </Typography>   
         <Box mt={3}>
           <Grid
             container

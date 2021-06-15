@@ -7,12 +7,20 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useStateValue } from "../../../context/StateProvider";
 import { auth } from "../../../firebase/firebaseConfig";
+import Fuse from "fuse.js";
 import Axios from "axios";
+import { displayFilter } from "../../../utils/basicUtils";
 
 function Header() {
-  const [{ cart, user, profile }] = useStateValue();
+  const [{ cart, user, profile, products }, dispatch] = useStateValue();
   const [address, setAddress] = useState({});
+  const [filterProductsByCategory, setFilterProductsByCategory] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const uniqCategory = [...new Set(products.map((item) => item.category))];
 
+  const fuse = new Fuse(filterProductsByCategory, {
+    keys: ["seller", "title", "category", "price", "rating"],
+  });
   const login = () => {
     if (user) auth.signOut();
   };
@@ -22,15 +30,52 @@ function Header() {
       "http://api.ipstack.com/116.72.212.165?access_key=1d58bc7d015ef00cfdb4078d50d8863b&format=1";
     const pineCodeFinder = async () => {
       try {
-        const {data} = await Axios.get(URL);
-        setAddress( data);
+        const { data } = await Axios.get(URL);
+        setAddress(data);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     pineCodeFinder();
   }, []);
+  useEffect(() => {
+    setFilterProductsByCategory(displayFilter(products));
+  }, [products]);
+  const handleCategoryChange = (e) => {
+    if (e.target.value === "all") {
+      setFilterProductsByCategory(displayFilter(products));
+      dispatch({
+        type: "SET_DISPLAY_PRODUCTS",
+        payload: displayFilter(products),
+      });
+    } else {
+      const filterProducts = displayFilter(products).filter(
+        (product) => product.category === e.target.value
+      );
+      setFilterProductsByCategory(filterProducts);
+      dispatch({
+        type: "SET_DISPLAY_PRODUCTS",
+        payload: filterProducts,
+      });
+    }
+  };
+  console.log(filterProductsByCategory);
 
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+    if (!e.target.value) {
+      dispatch({
+        type: "SET_DISPLAY_PRODUCTS",
+        payload: filterProductsByCategory,
+      });
+    } else {
+      const matches = fuse.search(e.target.value);
+      dispatch({
+        type: "SET_DISPLAY_PRODUCTS",
+        payload: matches.map((item) => item?.item),
+      });
+    }
+  };
   return (
     <nav className="header">
       <div className="header__top">
@@ -48,8 +93,32 @@ function Header() {
 
         {/* Search box */}
         <div className="header__search">
-          <input type="text" className="header__searchInput" />
-          <SearchIcon className="header__searchIcon" />
+          <form className="header__search">
+            <select
+              name="category"
+              id="category"
+              onChange={handleCategoryChange}
+              className="header__categorySelelctor"
+            >
+              <option value="all" selected>
+                All Categories
+              </option>
+              {uniqCategory.map((category, index) => (
+                <option value={category} key={`${category}-${index}`}>
+                  {category}
+                </option>
+              ))}
+            </select>
+
+            <input
+              type="text"
+              name="searchInput"
+              value={searchInput}
+              onChange={handleInputChange}
+              className="header__searchInput"
+            />
+            <SearchIcon className="header__searchIcon" />
+          </form>
         </div>
 
         <div className="header__flag"></div>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import { trimmer } from "./utils/basicUtils";
+import { displayFilter, trimmer } from "./utils/basicUtils";
 import RouterFile from "./RouterFile";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -10,14 +10,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { auth, db } from "./firebase/firebaseConfig";
 import { useStateValue } from "./context/StateProvider";
 
-
-
-
-
 function App() {
   const [profile, setProfile] = useState([]);
-  const [{ user }, dispatch] = useStateValue();
-
+  const [{ user, products }, dispatch] = useStateValue();
+  
+  useEffect(() => {
+    dispatch({
+      type: "SET_DISPLAY_PRODUCTS",
+      payload: displayFilter(products),
+    });
+  }, [products]);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       // user is logged in

@@ -55,7 +55,7 @@ const ProductCard = ({ className, product, ...rest }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Box display="flex" justifyContent="center" mb={3}>
-          <Avatar alt="Product" src={product.image} variant="square" />
+          <Avatar alt="Product" src={product.image} variant="circle" />
         </Box>
         <Typography
           align="center"
@@ -65,7 +65,7 @@ const ProductCard = ({ className, product, ...rest }) => {
         >
           {product.title}
         </Typography>
-        <Typography align="center" color="textPrimary" variant="body1">
+        <Typography align="center" color="primary" variant="body1">
           for <h3> ₹ {product.price} </h3>
           {Array(Math.floor(product.rating))
             .fill()

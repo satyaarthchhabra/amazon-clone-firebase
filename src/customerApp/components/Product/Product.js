@@ -21,6 +21,8 @@ function Product({ id, title, price, rating, image,seller }) {
             type: 'ADD_TO_CART',
             payload: { id, title, price, rating, image,seller }
         })
+        console.log('hello');
+        
         toast.info(`${title} added worth \n ₹${price} by seller:${seller}`);
     }
 

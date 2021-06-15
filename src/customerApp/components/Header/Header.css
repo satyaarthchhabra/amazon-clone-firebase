@@ -4,7 +4,7 @@
 }
 
 .header__top {
-  height: 60px;
+  height: 4.5rem;
   background-color: #131921;
   display: flex;
   align-items: center;
@@ -31,17 +31,26 @@
   flex: 1;
   align-items: center;
   border-radius: 24px;
+  justify-content: center;
 }
+.header__categorySelelctor {
+  height: 32px;
+  border: none;
+  outline: none;
+  border-radius: 8px 0 0px 8px;
 
+}
 .header__searchInput {
   height: 12px;
   padding: 10px;
   border: none;
-  width: 100%;
+  outline-width: 0;
+  width: 70%;
 }
 
 .header__searchIcon {
   padding: 5px;
+  border-radius: 0px 9px 8px 0px;
   height: 22px !important;
   background-color: #cd9042;
 }

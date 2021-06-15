@@ -5,7 +5,7 @@ export const initialState = {
     users:[],  
     profile: null,
     products: [],
-    categories: ["Phones", "Laptops"]
+    displayProducts:[]
 }
 
 export const getCartTotal = (cart) =>
@@ -25,6 +25,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 cart: []
+            }
+        case 'SET_DISPLAY_PRODUCTS':
+            return {
+                ...state,
+                displayProducts: action.payload
             }
 
         case 'REMOVE_FROM_CART':
