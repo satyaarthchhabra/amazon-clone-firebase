@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
+
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,7 +10,7 @@ import { useStateValue } from "../../../context/StateProvider";
 import { auth } from "../../../firebase/firebaseConfig";
 import Fuse from "fuse.js";
 import Axios from "axios";
-import { displayFilter } from "../../../utils/basicUtils";
+import {  displayFilter } from "../../../utils/basicUtils";
 
 function Header() {
   const [{ cart, user, profile, products }, dispatch] = useStateValue();
@@ -59,7 +60,6 @@ function Header() {
       });
     }
   };
-  console.log(filterProductsByCategory);
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -112,7 +112,8 @@ function Header() {
 
             <input
               type="text"
-              name="searchInput"
+              name="searchInput" 
+              placeholder="search here pls ......"
               value={searchInput}
               onChange={handleInputChange}
               className="header__searchInput"
